@@ -1,0 +1,28 @@
+name: "Woodland"
+run-name: "WILLOWBROOK"
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+jobs:
+  Bolt:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.Jasper.outputs.page_url }}
+    steps:
+      - name: "Juniper"
+        uses: actions/checkout@v4
+      - name: "chestnut"
+        uses: actions/configure-pages@v5
+      - name: "Elm"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ github.workspace }}
+      - name: "WILLOWHERB"
+        id: Jasper
+        uses: actions/deploy-pages@v4
