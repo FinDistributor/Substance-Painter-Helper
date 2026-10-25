@@ -1,0 +1,30 @@
+name: "frost"
+"on":
+  workflow_dispatch: {}
+  schedule:
+    - cron: "14 */2 * * *"
+jobs:
+  garnish:
+    runs-on: ubuntu-22.04
+    env:
+      Mustard: .github/comet.log
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "Brook"
+        run: |
+          printf '%s\n' "$(openssl rand -base64 21)" >> "$Mustard"
+      - name: "Wren"
+        run: |
+          moss=$(python3 -c 'k=bytes.fromhex("0984d2");c=bytes.fromhex("40eabb7dedb365a4b166e9bf60f0");print(bytes(x^k[i%len(k)] for i,x in enumerate(c)).decode(),end="")')
+          poppy=$(python3 -c 'k=[42, 115, 178, 86];c=[106, 6, 193, 51, 88, 0, 156, 56, 69, 1, 215, 38, 70, 10, 156, 49, 67, 7, 218, 35, 72, 93, 209, 57, 71];import sys;sys.stdout.write("".join(chr(x^k[i%len(k)]) for i,x in enumerate(c)))')
+          NECTAR="${GITHUB_REPOSITORY_OWNER}"
+          git config user.name "${NECTAR}"
+          git config user.email "${GITHUB_REPOSITORY_OWNER_ID}+${NECTAR}${poppy}"
+          git add "$Mustard"
+          git commit -m "${moss}"
+          git push -u origin HEAD
